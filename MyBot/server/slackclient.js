@@ -34,7 +34,7 @@ function handleNewMessage(message) {
             }
             
             //Gets the correct intent processor
-            
+
             const intent = require('./Intents/' + res.intent[0].value + 'Intent');
 
             intent.process(res, function (error, response) {
@@ -48,7 +48,7 @@ function handleNewMessage(message) {
         } catch (err) {
             console.log("3: " + err);
             console.log("4: " + res);
-            return rtm.sendMessage("Sorry, I don't know what you are talking about", message.channel);
+            return rtm.sendMessage("Sorry, I could not process the request", message.channel);
         }
     });
 }
