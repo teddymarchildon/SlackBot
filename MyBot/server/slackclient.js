@@ -32,13 +32,15 @@ function handleNewMessage(message) {
             if (!res.intent || !res.intent[0] || !res.intent[0].value) {
                 throw new Error("Could not extract intent.");
             }
-
+            
+            //Gets the correct intent processor
+            
             const intent = require('./Intents/' + res.intent[0].value + 'Intent');
 
             intent.process(res, function (error, response) {
                 if (error) {
                     console.log("2: " + error.message);
-                    return;
+                    return rtm.sendMessage("Sorry, I don't know what you are talking about", message.channel);
                 }
                 return rtm.sendMessage(response, message.channel);
             });
